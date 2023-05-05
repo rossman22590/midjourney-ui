@@ -20,7 +20,7 @@ const ROUTES: Route = {
   routes: [
     {
       path: '/',
-      name: 'MidJourney',
+      name: 'Image Generation',
       icon: <SmileOutlined />,
     },
   ],
@@ -67,23 +67,10 @@ export default function Main(children: JSX.Element) {
       hashed={false}>
       <ProLayout
         logo={"logo.png"}
-        title="AI Draw"
-        style={{ minHeight: '100vh' }}
+        title="AI Tutor"
+        style={{ minHeight: '0' }}
         route={ROUTES}
-        avatarProps={{
-          src: 'logo.png',
-          title: 'Eric',
-        }}
-        actionsRender={(props) => {
-          if (props.isMobile) return [];
-          return [
-            <Link href="https://github.com/erictik/midjourney-ui" key="about">
-             <GithubFilled  style={{
-              fontSize: 24,
-             }}/>
-            </Link>,
-          ];
-        }}
+ 
   
         menuItemRender={menuItemRender}
         menuFooterRender={(props) => {
@@ -95,7 +82,7 @@ export default function Main(children: JSX.Element) {
                 paddingBlockStart: 12,
               }}
             >
-              Power by Midjourney
+              Power by AI Tutor
             </p>
           );
         }}
