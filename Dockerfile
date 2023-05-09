@@ -1,28 +1,21 @@
 # ---- Base Node Image ----
-FROM node:18-alpine AS base
+FROM node:18-alpine
+
+# Set work directory
 WORKDIR /app
 
+# Copy package*.json files to the work directory
 COPY package*.json ./
 
-# ---- Build Stage ----
-FROM base AS build
+# Install dependencies
+RUN npm install || (echo "npm install failed, trying yarn..." && yarn)
+
+# Copy remaining files to the work directory
 COPY . .
-RUN npm ci --prefer-offline --no-audit --progress=false
-RUN npm run build
 
-# ---- Production Stage ----
-FROM base AS production
-WORKDIR /dist
-
-COPY --from=build /app/.next ./.next
-COPY public ./public
-COPY next.config.js ./next.config.js
-
-# Install production dependencies
-RUN npm ci --only=production
 
 # Expose the port the app will run on
 EXPOSE 3000
 
-# Start the application
-CMD ["npm", "start"]
+# Start the development server
+CMD ["npm", "run", "dev"]
