@@ -7,8 +7,9 @@ COPY package*.json ./
 # ---- Build Stage ----
 FROM base AS build
 COPY . .
-RUN npm ci --prefer-offline --no-audit --progress=false
+RUN npm install --prefer-offline --no-audit --progress=false
 RUN npm run build
+
 
 # ---- Production Stage ----
 FROM base AS production
