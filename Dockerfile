@@ -1,13 +1,24 @@
-# ---- Production ----
-FROM node:18-alpine AS production
+# ---- Base Node Image ----
+FROM node:18-alpine AS base
+WORKDIR /app
+
+COPY package*.json ./
+
+# ---- Build Stage ----
+FROM base AS build
+COPY . .
+RUN npm ci --prefer-offline --no-audit --progress=false
+RUN npm run build
+
+# ---- Production Stage ----
+FROM base AS production
 WORKDIR /dist
 
-COPY .next ./.next
+COPY --from=build /app/.next ./.next
 COPY public ./public
-COPY package*.json ./
 COPY next.config.js ./next.config.js
 
-# Use npm ci for production dependencies installation
+# Install production dependencies
 RUN npm ci --only=production
 
 # Expose the port the app will run on
