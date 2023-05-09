@@ -1,6 +1,6 @@
 # midjourney-ui
 
-Midjourney UI is an open source txt2img UI for AI draw
+Midjourney UI is an open source txt2img UI for AI draw 
 
 <div align="center">
 	<p>
