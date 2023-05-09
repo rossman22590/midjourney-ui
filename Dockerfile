@@ -1,15 +1,21 @@
-# ---- Production ----
-FROM node:18-alpine AS production
-WORKDIR /dist
+# ---- Base Node Image ----
+FROM node:18-alpine
 
-COPY .next ./.next
-COPY public ./public
+# Set work directory
+WORKDIR /app
+
+# Copy package*.json files to the work directory
 COPY package*.json ./
-COPY next.config.js ./next.config.js
-# use npm ci for production
-RUN npm install --omit=dev
+
+# Install dependencies
+RUN npm install || (echo "npm install failed, trying yarn..." && yarn)
+
+# Copy remaining files to the work directory
+COPY . .
+
+
 # Expose the port the app will run on
 EXPOSE 3000
 
-# Start the application
-CMD ["yarn", "start"]
+# Start the development server
+CMD ["npm", "run", "dev"]
