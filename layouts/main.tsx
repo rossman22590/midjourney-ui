@@ -66,8 +66,8 @@ export default function Main(children: JSX.Element) {
       dark={dark}
       hashed={false}>
       <ProLayout
-        logo={"logo.png"}
-        title="AI Tutor"
+        logo={"logo.svg"}
+        title=""
         style={{ minHeight: '0' }}
         route={ROUTES}
        
