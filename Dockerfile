@@ -1,24 +1,21 @@
-# Use an official Node runtime as the base image
-FROM node:latest
+# ---- Base Node Image ----
+FROM node:18-alpine
 
-# Set the working directory in the container to /app
+# Set work directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json into the directory /app in the container
+# Copy package*.json files to the work directory
 COPY package*.json ./
 
-# Install any needed packages specified in package.json
-RUN npm install
+# Install dependencies
+RUN npm install || (echo "npm install failed, trying yarn..." && yarn)
 
-# Bundle app source inside Docker image
+# Copy remaining files to the work directory
 COPY . .
 
-# Build the app
-RUN npm run build
 
-# Set the environment variable to production
-ENV NODE_ENV=production
+# Expose the port the app will run on
+EXPOSE 3000
 
-# Start the production server
-CMD ["npm", "start"]
-
+# Start the development server
+CMD ["npm", "run", "dev"]
