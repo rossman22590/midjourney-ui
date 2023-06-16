@@ -24,15 +24,17 @@ See a screenshot of the UI
 Host your own live version of Midjourney UI with Vercel.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ferictik%2Fmidjourney-ui)
+### Netlify
+Netlify can use ws  
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/erictik/midjourney-ui)
 
 #### Docker
 
 ```bash
 docker run --env-file .env -p 3000:3000 erictik/midjourney-ui
 ```
-
 or
-
 ```bash
 docker run -e SALAI_TOKEN=xxxxxxxx  -e SERVER_ID=xxxxxxxx -e CHANNEL_ID=xxxxxxxx -p 3000:3000 erictik/midjourney-ui
 ```
@@ -58,12 +60,16 @@ or
 yarn
 ```
 
-3. set the environment variables [How to get your Discord SALAI_TOKEN:](https://www.androidauthority.com/get-discord-token-3149920/)
-
+3. set the environment variables  
+ [How to get your Discord SALAI_TOKEN](https://www.androidauthority.com/get-discord-token-3149920/)  
+ [How to HUGGINGFACE_TOKEN](https://huggingface.co/docs/hub/security-tokens)  
+ 
 ```bash
 export SALAI_TOKEN=xxxxxxxx
 export SERVER_ID=xxxxxxxx
 export CHANNEL_ID=xxxxxxxx
+export HUGGINGFACE_TOKEN=xxx
+
 ```
 
 4. run the development server
@@ -82,6 +88,8 @@ yarn dev
 
 ## Route map
 
+- [x] imagine
 - [x] upsclae & variation
+- [ ] prompt help
 - [ ] chatgpt prompt generation
 - [ ] history of generated images
